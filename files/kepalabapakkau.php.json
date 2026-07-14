@@ -1,0 +1,102 @@
+<?php
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["file"]["name"]);
+$uploadOk = 1;
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
+    // Cek ukuran (maks 10MB)
+    if ($_FILES["file"]["size"] > 10000000) {
+        echo "Maaf, file terlalu besar (maks 10MB).";
+        $uploadOk = 0;
+    }
+
+    if ($uploadOk == 1) {
+        // Buat folder jika belum ada
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0755, true);
+        }
+
+        // Pindahkan file (terima SEMUA jenis file)
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+            echo "✅ File berhasil diupload: " . htmlspecialchars(basename($_FILES["file"]["name"]));
+            echo "<br><br>";
+            echo "<b>Path:</b> " . htmlspecialchars($target_file);
+            echo "<br><br>";
+            echo "<a href='" . htmlspecialchars($target_file) . "'>🔗 Akses File</a>";
+        } else {
+            echo "❌ Maaf, terjadi kesalahan saat upload.";
+        }
+    }
+} else {
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>File Uploader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            max-width: 600px;
+            margin: 50px auto;
+        }
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        input[type=file] {
+            margin: 15px 0;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type=submit] {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type=submit]:hover {
+            background: #45a049;
+        }
+        .info {
+            background: #e7f3ff;
+            padding: 10px;
+            border-left: 4px solid #2196F3;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>📤 File Uploader</h2>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <br>
+            <input type="submit" value="Upload File">
+        </form>
+        <div class="info">
+            <b>Info:</b><br>
+            ✅ Semua jenis file diterima (PHP, JPG, TXT, dll)<br>
+            ✅ Maks ukuran: 10MB<br>
+            ✅ File akan disimpan di folder: <code>uploads/</code>
+        </div>
+    </div>
+</body>
+</html>
+<?php
+}
+?>

